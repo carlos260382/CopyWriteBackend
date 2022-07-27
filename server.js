@@ -22,10 +22,10 @@ mongoose
     }
   )
   .then(() => {
-    console.log("esta conectado base datos");
+    console.log("connected online");
   })
   .catch((error) => {
-    console.log("este es el error", error);
+    console.log(error);
   });
 
 const reverseText = (text) => {
@@ -35,18 +35,14 @@ const reverseText = (text) => {
 };
 
 app.get("/apihost/iecho/:text", async (req, res) => {
-  console.log("lo que llega params", req.params.text);
   try {
     const reverse = reverseText(req.params.text);
-    console.log("el revese", reverse);
     const text = new Text({
       text: reverse,
     });
-    console.log("la BD Text", text);
     const createdText = await text.save();
     const texts = await Text.find();
     res.status(200).send(texts);
-    console.log("el ultimo text", texts);
   } catch (error) {
     res.status(400).send({ error: "no text" });
   }
