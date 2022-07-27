@@ -1,10 +1,9 @@
-const express = require("express");
-const cors = require("cors");
-const http = require("http");
-const morgan = require("morgan");
-const mongoose = require("mongoose");
-const Text = require("./models/Text.js");
-// const reverseText = require("./utils.js");
+import express from "express";
+import mongoose from "mongoose";
+import morgan from "morgan";
+import cors from "cors";
+import http from "http";
+import Text from "./models/Text.js";
 
 const app = express();
 app.use(morgan("dev"));
@@ -46,13 +45,10 @@ app.get("/apihost/iecho/:text", async (req, res) => {
     console.log("la BD Text", text);
     const createdText = await text.save();
     const texts = await Text.find();
-    res.status(200).send({
-      ...texts,
-      text: createdText,
-    });
+    res.status(200).send(texts);
     console.log("el ultimo text", texts);
   } catch (error) {
-    res.status(404).send({ message: "User Not Found" });
+    res.status(400).send({ error: "no text" });
   }
 });
 
