@@ -11,6 +11,7 @@ https://nodejs.org/es/download/
 
 - En la carpeta raiz ejecute “npm install” para instalar las dependencias
 - Posteriormente inicializar el proyecto con “npm start” el cual se levantara en "http://localhost:3001/"
+- Para ejecutar las pruebas de testing ejecute "npm test"
 - la API Recibe la informacion desde el cliente para ser procesada (reverse) y almacenada en una base de datos desplegada en "Mongo Atlas" 
 (la cual no tiene necesidad de configurar), para ser retornada al fontend.
 
