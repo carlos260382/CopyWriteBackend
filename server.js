@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import cors from "cors";
 import http from "http";
-import Text from "./models/Text.js";
+import Router from "./routers/routers.js";
 
 const app = express();
 app.use(morgan("dev"));
@@ -28,28 +28,32 @@ mongoose
     console.log(error);
   });
 
-const reverseText = (text) => {
-  const result = text.split("").reverse().join("");
+// const reverseText = (text) => {
+//   const result = text.split("").reverse().join("");
 
-  return result;
-};
+//   return result;
+// };
 
-app.get("/apihost/iecho/:text", async (req, res) => {
-  try {
-    const reverse = reverseText(req.params.text);
-    const text = new Text({
-      text: reverse,
-    });
-    const createdText = await text.save();
-    const texts = await Text.find();
-    res.status(200).send(texts);
-  } catch (error) {
-    res.status(400).send({ error: "no text" });
-  }
-});
+app.use("/", Router);
+
+// app.get("/apihost/iecho/:text", async (req, res) => {
+//   try {
+//     const reverse = reverseText(req.params.text);
+//     const text = new Text({
+//       text: reverse,
+//     });
+//     const createdText = await text.save();
+//     const texts = await Text.find();
+//     res.status(200).send(texts);
+//   } catch (error) {
+//     res.status(400).send({ error: "no text" });
+//   }
+// });
 
 const httpServer = http.Server(app);
 
 httpServer.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
 });
+
+export default app;
